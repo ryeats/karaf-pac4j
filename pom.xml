@@ -3,196 +3,36 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-
     <parent>
         <groupId>org.sonatype.oss</groupId>
         <artifactId>oss-parent</artifactId>
         <version>9</version>
     </parent>
-    
-    <groupId>karaf-pac4j</groupId>
+
+    <groupId>org.pac4j</groupId>
     <artifactId>karaf-pac4j</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-
-
-
     <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <java.version>1.8</java.version>
         <spring.version>5.1.1.RELEASE</spring.version>
         <pac4jVersion>3.3.0</pac4jVersion>
         <j2e-pac4j.version>4.1.0</j2e-pac4j.version>
         <jee-pac4j.version>4.1.0</jee-pac4j.version>
         <javaee.version>7.0</javaee.version>
+        <jetty.version>9.4.20.v20190813</jetty.version>
+        <logback.version>1.2.3</logback.version>
+        <pax.web.version>7.2.11</pax.web.version>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.pac4j</groupId>
-            <artifactId>j2e-pac4j</artifactId>
-            <version>${j2e-pac4j.version}</version>
-        </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.springframework</groupId>-->
-<!--            <artifactId>spring-web</artifactId>-->
-<!--            <version>${spring.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework</groupId>-->
-<!--            <artifactId>spring-context</artifactId>-->
-<!--            <version>${spring.version}</version>-->
-<!--        </dependency>-->
-        <dependency>
-            <groupId>org.pac4j</groupId>
-            <artifactId>pac4j-oauth</artifactId>
-            <version>${pac4jVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.pac4j</groupId>
-            <artifactId>pac4j-openid</artifactId>
-            <version>${pac4jVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.pac4j</groupId>
-            <artifactId>pac4j-cas</artifactId>
-            <version>${pac4jVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.pac4j</groupId>
-            <artifactId>pac4j-saml</artifactId>
-            <version>${pac4jVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.pac4j</groupId>
-            <artifactId>pac4j-gae</artifactId>
-            <version>${pac4jVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.pac4j</groupId>
-            <artifactId>pac4j-oidc</artifactId>
-            <version>${pac4jVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.pac4j</groupId>
-            <artifactId>pac4j-http</artifactId>
-            <version>${pac4jVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.pac4j</groupId>
-            <artifactId>pac4j-ldap</artifactId>
-            <version>${pac4jVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.pac4j</groupId>
-            <artifactId>pac4j-jwt</artifactId>
-            <version>${pac4jVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.pac4j</groupId>
-            <artifactId>pac4j-sql</artifactId>
-            <version>${pac4jVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.pac4j</groupId>
-            <artifactId>pac4j-mongo</artifactId>
-            <version>${pac4jVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.pac4j</groupId>
-            <artifactId>pac4j-kerberos</artifactId>
-            <version>${pac4jVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.pac4j</groupId>
-            <artifactId>pac4j-couch</artifactId>
-            <version>${pac4jVersion}</version>
-        </dependency>
-    </dependencies>
-        <build>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.karaf.tooling</groupId>
-                    <artifactId>karaf-maven-plugin</artifactId>
-                    <extensions>true</extensions>
-                    <executions>
-                        <execution>
-                            <id>generate-features-file</id>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>features-generate-descriptor</goal>
-                            </goals>
-                            <configuration>
-                                <aggregateFeatures>true</aggregateFeatures>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <id>copy-resources</id>
-                            <phase>generate-resources</phase>
-                            <goals>
-                                <goal>copy-resources</goal>
-                            </goals>
-                            <configuration>
-                                <outputDirectory>${basedir}/target/classes</outputDirectory>
-                                <resources>
-                                    <resource>
-                                        <directory>src/main/resources</directory>
-                                        <filtering>true</filtering>
-                                    </resource>
-                                </resources>
-                            </configuration>
-                        </execution>
-                        <execution>
-                            <!--copy over config.properties and jre.properties to etc-->
-                            <id>copy-resources-config</id>
-                            <phase>generate-resources</phase>
-                            <goals>
-                                <goal>copy-resources</goal>
-                            </goals>
-                            <configuration>
-                                <outputDirectory>${basedir}/${setup.folder}/etc</outputDirectory>
-                                <resources>
-                                    <resource>
-                                        <directory>src/main/resources/etc</directory>
-                                        <filtering>true</filtering>
-                                    </resource>
-                                </resources>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
-                <!-- Puts the features XML file for this app into the maven repo. -->
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>build-helper-maven-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <id>attach-artifacts</id>
-                            <phase>package</phase>
-                            <inherited>false</inherited>
-                            <goals>
-                                <goal>attach-artifact</goal>
-                            </goals>
-                            <configuration>
-                                <artifacts>
-                                    <artifact>
-                                        <file>target/classes/features.xml</file>
-                                        <type>xml</type>
-                                        <classifier>features</classifier>
-                                    </artifact>
-                                </artifacts>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
-            </plugins>
-        </build>
+    <modules>
+        <module>jetty-pac4j</module>
+        <module>karaf-pac4j-demo</module>
+        <module>pac4j-features</module>
+    </modules>
 
     <repositories>
         <repository>
