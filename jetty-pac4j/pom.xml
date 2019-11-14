@@ -14,6 +14,16 @@
     <packaging>bundle</packaging>
 
 
+
+    <properties>
+        <pac4jVersion>3.3.0</pac4jVersion>
+        <j2e-pac4j.version>4.1.0</j2e-pac4j.version>
+        <java.version>1.8</java.version>
+        <spring.version>5.1.1.RELEASE</spring.version>
+        <cas.version>3.6.1</cas.version>
+    </properties>
+
+
     <dependencies>
 
         <dependency>
@@ -76,6 +86,86 @@
         </dependency>
 
 
+        <dependency>
+            <groupId>org.pac4j</groupId>
+            <artifactId>j2e-pac4j</artifactId>
+            <version>${j2e-pac4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.pac4j</groupId>
+            <artifactId>pac4j-oauth</artifactId>
+            <version>${pac4jVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.pac4j</groupId>
+            <artifactId>pac4j-openid</artifactId>
+            <version>${pac4jVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.pac4j</groupId>
+            <artifactId>pac4j-cas</artifactId>
+            <version>${pac4jVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.pac4j</groupId>
+            <artifactId>pac4j-saml</artifactId>
+            <version>${pac4jVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.pac4j</groupId>
+            <artifactId>pac4j-gae</artifactId>
+            <version>${pac4jVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.pac4j</groupId>
+            <artifactId>pac4j-oidc</artifactId>
+            <version>${pac4jVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.pac4j</groupId>
+            <artifactId>pac4j-http</artifactId>
+            <version>${pac4jVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.pac4j</groupId>
+            <artifactId>pac4j-ldap</artifactId>
+            <version>${pac4jVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.pac4j</groupId>
+            <artifactId>pac4j-jwt</artifactId>
+            <version>${pac4jVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.pac4j</groupId>
+            <artifactId>pac4j-sql</artifactId>
+            <version>${pac4jVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.pac4j</groupId>
+            <artifactId>pac4j-mongo</artifactId>
+            <version>${pac4jVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.pac4j</groupId>
+            <artifactId>pac4j-kerberos</artifactId>
+            <version>${pac4jVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.pac4j</groupId>
+            <artifactId>pac4j-couch</artifactId>
+            <version>${pac4jVersion}</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

@@ -34,6 +34,7 @@ import org.eclipse.jetty.server.UserIdentity;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
+import org.pac4j.core.client.Client;
 import org.pac4j.core.config.Config;
 import org.pac4j.core.config.ConfigSingleton;
 import org.pac4j.core.context.J2EContext;
@@ -46,7 +47,7 @@ public class JettyAuthenticator extends LoginAuthenticator {
   public static final String DDF_AUTH_METHOD = "DDF";
   private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(JettyAuthenticator.class);
   private CopyOnWriteArraySet<String> keysOfInitializedSecurityFilters;
-  private Config config;
+  private Config config = new DemoConfigFactory().build();
 
   public JettyAuthenticator() {
     super();
@@ -80,11 +81,15 @@ public class JettyAuthenticator extends LoginAuthenticator {
 
     final Collection<CommonProfile>[] profileCollection;
     SecurityLogic<Authentication, J2EContext> securityLogic = getConfig().getSecurityLogic();
+    String clients = getConfig().getClients().getClients().stream().map(Client::getName)
+        .collect(Collectors.joining(", "));
+    String authorizers = String.join(",", getConfig().getAuthorizers().keySet());
+    String matchers = String
+        .join(",", getConfig().getMatchers().keySet());
     return securityLogic.perform(context, getConfig(), (ctx, profiles, parameters) -> {
           if (profiles.isEmpty()) {
             return null;
           } else {
-//            profiles.iterator().next().geta
             Set<Principal> principals = profiles.stream().map(CommonProfile::asPrincipal).collect(
                 Collectors.toCollection(
                     HashSet::new));
@@ -92,9 +97,8 @@ public class JettyAuthenticator extends LoginAuthenticator {
                 Collections.emptySet(), Collections.emptySet()));
             return new JettyAuthenticatedUser(userIdentity);
           }
-        }, (code, j2EContext) -> null, getConfig().getClients().toString(),
-        String.join(",", getConfig().getAuthorizers().keySet()), String
-            .join(",", getConfig().getMatchers().keySet()), true);
+        }, (code, j2EContext) -> null, clients, authorizers
+        , matchers, true);
   }
 
   protected BundleContext getContext() {
