@@ -16,7 +16,7 @@
 
 
     <properties>
-        <pac4jVersion>3.3.0</pac4jVersion>
+        <pac4jVersion>4.5.5</pac4jVersion>
         <j2e-pac4j.version>4.1.0</j2e-pac4j.version>
         <java.version>1.8</java.version>
         <spring.version>5.1.1.RELEASE</spring.version>
